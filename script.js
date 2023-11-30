@@ -57,8 +57,23 @@ function hidePreloader() {
 updateTextLoading()
 updateTextInterval = setInterval(updateTextLoading, 3000);
 window.addEventListener("load", () => {
-    setTimeout(hidePreloader, 1);
+    setTimeout(hidePreloader, 8000);
 });
+
+
+// ________[Section Handle]________
+// Projects Button
+function swipeToRight() {
+	const projectsContainer = document.querySelector('#projects');
+	projectsContainer.style.left = '0';
+}
+document.querySelector('a[href="#projects"]').addEventListener('click', () => {
+	document.querySelector('.about').style.transition = 'all 2s ease'
+	document.querySelector('.about').style.transform = 'translateX(2000px)'
+	setTimeout(() => {
+		document.querySelector('#projects').style.display = 'block'
+	}, 2000);
+})
 
 
 // ________[idk]________
@@ -84,7 +99,7 @@ const setTheme = (bodyClass, btnClass) => {
 	body.classList.remove(localStorage.getItem('portfolio-theme'))
 	btnTheme.classList.remove(localStorage.getItem('portfolio-btn-theme'))
 
-  addThemeClass(bodyClass, btnClass)
+  	addThemeClass(bodyClass, btnClass)
 
 	localStorage.setItem('portfolio-theme', bodyClass)
 	localStorage.setItem('portfolio-btn-theme', btnClass)
@@ -96,7 +111,7 @@ const toggleTheme = () =>
 btnTheme.addEventListener('click', toggleTheme)
 
 const displayList = () => {
-	const navUl = document.querySelector('.nav__list')
+	const navUl = document.querySelector('.nav__list-sm')
 
 	if (btnHamburger.classList.contains('fa-bars')) {
 		btnHamburger.classList.remove('fa-bars')

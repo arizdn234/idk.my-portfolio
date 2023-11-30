@@ -11,32 +11,57 @@
 	<script src="https://kit.fontawesome.com/fa62c117c7.js" crossorigin="anonymous"></script>
 	<link rel="stylesheet" href="styles.css" />
 	<title>My Portfolio | Ari Zidan</title>
+
+	<!-- AOS CSS -->
+	<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
 </head>
 
 <body class="light" id="top">
-	<header class="header center">
-		<h3>
+
+	<!-- Preloader -->
+    <div class="preloader">
+        <svg class="tea" width="37" height="48" viewbox="0 0 37 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path
+                d="M27.0819 17H3.02508C1.91076 17 1.01376 17.9059 1.0485 19.0197C1.15761 22.5177 1.49703 29.7374 2.5 34C4.07125 40.6778 7.18553 44.8868 8.44856 46.3845C8.79051 46.79 9.29799 47 9.82843 47H20.0218C20.639 47 21.2193 46.7159 21.5659 46.2052C22.6765 44.5687 25.2312 40.4282 27.5 34C28.9757 29.8188 29.084 22.4043 29.0441 18.9156C29.0319 17.8436 28.1539 17 27.0819 17Z"
+                stroke="var(--colorIcon)" stroke-width="2"></path>
+            <path
+                d="M29 23.5C29 23.5 34.5 20.5 35.5 25.4999C36.0986 28.4926 34.2033 31.5383 32 32.8713C29.4555 34.4108 28 34 28 34"
+                stroke="var(--colorIcon)" stroke-width="2"></path>
+            <path id="teabag" fill="var(--colorIcon)" fill-rule="evenodd" clip-rule="evenodd"
+                d="M16 25V17H14V25H12C10.3431 25 9 26.3431 9 28V34C9 35.6569 10.3431 37 12 37H18C19.6569 37 21 35.6569 21 34V28C21 26.3431 19.6569 25 18 25H16ZM11 28C11 27.4477 11.4477 27 12 27H18C18.5523 27 19 27.4477 19 28V34C19 34.5523 18.5523 35 18 35H12C11.4477 35 11 34.5523 11 34V28Z">
+            </path>
+            <path id="steamL" d="M17 1C17 1 17 4.5 14 6.5C11 8.5 11 12 11 12" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round" stroke="var(--colorIcon)"></path>
+            <path id="steamR" d="M21 6C21 6 21 8.22727 19 9.5C17 10.7727 17 13 17 13" stroke="var(--colorIcon)"
+                stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+        </svg>
+        <p class="pre-title"></p>
+        <p class="pre-text"></p>
+    </div>
+	
+	<header class="header center" data-aos="fade-down" data-aos-duration="800">
+		<h3 data-aos="fade-right" data-aos-delay="800" data-aos-duration="800">
 			<a href="#" class="link">Arizidane</a>
 		</h3>
 
 		<nav class="nav center">
 			<ul class="nav__list center">
-				<li class="nav__list-item">
+				<li class="nav__list-item" data-aos="fade-left">
 					<a class="link link--nav" href="#projects">Projects</a>
 				</li>
-				<li class="nav__list-item">
+				<li class="nav__list-item" data-aos="fade-left" data-aos-delay="500">
 					<a class="link link--nav" href="#skills">Skills</a>
 				</li>
-				<li class="nav__list-item">
+				<li class="nav__list-item" data-aos="fade-left" data-aos-delay="1000">
 					<a class="link link--nav" href="#Internship">Internship</a>
 				</li>
 			</ul>
 
-			<button type="button" aria-label="toggle theme" class="btn btn--icon">
+			<button type="button" aria-label="toggle theme" class="btn btn--icon" data-aos="fade-down" data-aos-delay="1200" data-aos-duration="400">
 				<i aria-hidden="true" id="btn-theme" class="fas fa-moon"></i>
 			</button>
 
-			<button type="button" aria-label="toggle navigation" class="btn btn--icon nav__hamburger">
+			<button type="button" aria-label="toggle navigation" data-aos="fade-down" data-aos-delay="1200" data-aos-duration="400" class="btn btn--icon nav__hamburger">
 				<i aria-hidden="true" class="fas fa-bars"></i>
 			</button>
 		</nav>
@@ -45,17 +70,17 @@
 	<main>
 		<!-- About -->
 		<div class="about center">
-			<h1>Hi, I am <span class="about__name">Mohammad Ari Zidan Syafrizal.</span></h1>
+			<h1>Hi there, I am <span class="about__name">Mohammad Ari Zidan Syafrizal.</span></h1>
 			<h2 class="about__role">Web Developer</h2>
 			<p class="about__desc">
-				As a web developer, you're at the forefront of creating the digital experiences that people interact
-				with every day. Whether you're working on frontend technologies like HTML, CSS, and JavaScript or diving
+				As a web developer, we're at the forefront of creating the digital experiences that people interact
+				with every day. Whether we're working on frontend technologies like HTML, CSS, and JavaScript or diving
 				into backend development with frameworks like Node.js or Django, the world of web development is vast
 				and always evolving.
 
-				If you have any specific questions about web development, whether it's related to a particular
+				If we have any specific questions about web development, whether it's related to a particular
 				technology stack, best practices, or troubleshooting a specific issue, feel free to ask. I'm here to
-				help you on your web development journey!
+				help we on our web development journey!
 			</p>
 			<br>
 			<a href="mailto:zidanerizal17@gmail.com">Mail: zidanerizal17@gmail.com </a>
@@ -84,7 +109,8 @@
 				<div class="project">
 					<h3>Web profile</h3>
 					<p class="project__description">
-						Passionate web developer, expert in HTML, CSS, JavaScript, creating seamless digital experiences with innovative solutions.
+						Passionate web developer, expert in HTML, CSS, JavaScript, creating seamless digital experiences
+						with innovative solutions.
 					</p> <!--Project description-->
 					<ul class="project__stack">
 						<li class="project__stack-item">HTML</li>
@@ -97,7 +123,8 @@
 
 						<i aria-hidden="true" class="fab fa-github"></i>
 					</a>
-					<a href="https://arizdn234.github.io/Assignment1-arizidan-MSIB/portofolio.html" aria-label="live preview" class="link link--icon" target="_blank">
+					<a href="https://arizdn234.github.io/Assignment1-arizidan-MSIB/portofolio.html"
+						aria-label="live preview" class="link link--icon" target="_blank">
 						<!--Project demo or git link-->
 						<i aria-hidden="true" class="fas fa-external-link-alt"></i>
 					</a>
@@ -106,7 +133,8 @@
 				<div class="project">
 					<h3>Kanban App</h3>
 					<p class="project__description">
-						Nostalgic Kanban App: blending vintage vibes with modern efficiency for streamlined task management and productivity.
+						Nostalgic Kanban App: blending vintage vibes with modern efficiency for streamlined task
+						management and productivity.
 					</p> <!--Project description-->
 					<ul class="project__stack">
 						<li class="project__stack-item">HTML</li>
@@ -119,7 +147,8 @@
 
 						<i aria-hidden="true" class="fab fa-github"></i>
 					</a>
-					<a href="https://arizdn234.github.io/Assignment2-arizidan-MSIB/" aria-label="live preview" class="link link--icon" target="_blank">
+					<a href="https://arizdn234.github.io/Assignment2-arizidan-MSIB/" aria-label="live preview"
+						class="link link--icon" target="_blank">
 						<!--Project demo or git link-->
 						<i aria-hidden="true" class="fas fa-external-link-alt"></i>
 					</a>
@@ -128,7 +157,8 @@
 				<div class="project">
 					<h3>JSON Music data CRUD</h3>
 					<p class="project__description">
-						Performing CRUD operations on JSON music data, ensuring seamless Create, Read, Update, and Delete functionalities.
+						Performing CRUD operations on JSON music data, ensuring seamless Create, Read, Update, and
+						Delete functionalities.
 					</p> <!--Project description-->
 					<ul class="project__stack">
 						<li class="project__stack-item">HTML</li>
@@ -156,7 +186,8 @@
 			<div class="project">
 				<h3>Bookstore API</h3>
 				<p class="project__description">
-					Bookstore API: Empowering seamless integration, retrieval, and manipulation of data for an optimized and dynamic bookstore experience.
+					Bookstore API: Empowering seamless integration, retrieval, and manipulation of data for an optimized
+					and dynamic bookstore experience.
 				</p>
 				<ul class="project__stack">
 					<li class="project__stack-item">NodeJS</li>
@@ -164,8 +195,7 @@
 					<li class="project__stack-item">Hapi</li>
 				</ul>
 
-				<a href="#" aria-label="" target="_blank"
-					class="link link--icon">
+				<a href="#" aria-label="" target="_blank" class="link link--icon">
 					<!-- Include the certification links and  -->
 					<i aria-hidden="true" class="fab fa-github"></i>
 				</a>
@@ -189,22 +219,20 @@
 				<li class="skills__list-item btn btn--plain">Git</li>
 			</ul>
 		</section>
+	</main>
 
-		<footer class="footer">
-			<a href="" class="link footer__link">
-				Created By M Ari Zidan S
-			</a>
-		</footer>
+	<footer class="footer">
+		<a href="" class="link footer__link">
+			Created By M Ari Zidan S
+		</a>
+	</footer>
 
-		<div class="scroll-container">
-			<div class="scroll-top">
-				<a aria-label="Scroll up" href="#top">
-					<i aria-hidden="true" class="fas fa-arrow-up"></i>
-				</a>
-			</div>
-		</div>
+	<script src="./script.js"></script>
 
-		<script src="./script.js"></script>
+	<!-- * AOS -->
+	<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+	<script>AOS.init();</script>
+
 </body>
 
 </html>

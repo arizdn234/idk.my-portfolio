@@ -86,6 +86,12 @@ function msgBox(title, msg) {
 document.querySelector('#resume').addEventListener('click', () => {
 	msgBox('Sorry', 'My Resume lost 2 week ago:(')
 })
+document.querySelector('#linked-in').addEventListener('click', () => {
+	msgBox('Sorry', 'I forgot my LinkedIn account password:(')
+})
+document.querySelector('.no-repo').addEventListener('click', () => {
+	msgBox('Sorry', 'This section does not contain any repositories :(')
+})
 
 
 // ________[Button mode Handler]_______

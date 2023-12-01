@@ -252,6 +252,7 @@ header h3 a::after,
   font-size: 1.2rem;
 }
 
+.no-repo,
 #btn-theme,
 .fa-github,
 .fa-linkedin {
@@ -339,11 +340,7 @@ main {
   transition: filter .3s;
   animation: slideRight 1s;
   z-index: 20;
-}
-
-#btn1:hover,
-#btn1:focus {
-  filter: invert(100%);
+  filter: invert(80%);
 }
 
 #btn2 {
@@ -355,10 +352,7 @@ main {
   transition: filter .3s;
   animation: slideLeft 1s;
   z-index: 20;
-}
-
-#btn2:hover {
-  filter: invert(100%);
+  filter: invert(80%);
 }
 
 #btn3 {
@@ -369,8 +363,11 @@ main {
   transition: filter .3s;
   letter-spacing: 3px;
   z-index: 20;
+  filter: invert(80%);
 }
 
+#btn1:hover,
+#btn2:hover,
 #btn3:hover {
   filter: invert(100%);
 }
@@ -561,8 +558,8 @@ header h3 a:hover {
 /* Preloader Style */
 .preloader {
   position: fixed;
-  min-width: 100%;
-  min-height: 100%;
+  width: 100%;
+  height: 100%;
   z-index: 45;
   background-color: rgba(0, 0, 0, 0.96);
   opacity: 1;
@@ -570,6 +567,7 @@ header h3 a:hover {
   transition: all .8s;
   justify-content: center;
   align-items: center;
+  border: 1px solid red;
 }
 
 .preloader .pre-title {
@@ -598,7 +596,8 @@ header h3 a:hover {
 svg.tea {
   --colorIcon: #f1f1f1;
   background-color: transparent;
-  transform: scale(2);
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 svg.tea #teabag {
@@ -1239,7 +1238,8 @@ svg.tea #steamR {
   }
 
   html {
-    overflow: auto;
+    overflow-y: auto;
+    overflow-x: hidden;
   }
 
   .preloader .pre-text {
@@ -1335,6 +1335,10 @@ svg.tea #steamR {
     display: block;
     padding: 2em;
     margin-top: 3em;
+  }
+
+  svg.tea {
+    transform: translateY(-1rem) scale(2);
   }
 
   .mode {

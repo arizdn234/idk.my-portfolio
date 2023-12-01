@@ -61,7 +61,34 @@ window.addEventListener("load", () => {
 });
 
 
-// ________[Button mode Handler]_______
+// ________[Own Builder]_______
+// Hider element
+function elementHider(selector, from=`translate(0, 0)`, to=`translate(0, 0)`) {
+	const ele = document.querySelector(selector)
+	ele.style.transform = from
+	ele.style.opacity = '1'
+	ele.style.transition = 'all .3s'
+	ele.style.transform = to
+	setTimeout(() => {
+		ele.style.opacity = '0'
+		ele.style.display = 'none'
+	}, 1500);
+}
+
+// Shower element
+function elementShower(selector, from=`translate(0, 0)`, to=`translate(0, 0)`, display='block') {
+	const ele = document.querySelector(selector)
+	ele.style.transform = from
+	ele.style.opacity = '0'
+	ele.style.transition = 'all .3s'
+	ele.style.transform = to
+	setTimeout(() => {
+		ele.style.opacity = '1'
+		ele.style.display = display
+	}, 1500);
+}
+
+// Show message box
 function msgBox(title, msg) {
 	const ele = document.querySelector('.modal')
 	ele.style.opacity = '1'
@@ -106,21 +133,31 @@ if (!localStorage.getItem('isParallaxMode')) {
 document.querySelector('.mode').addEventListener('click', () => {
 	const bugElement = document.querySelector('.bug');
 	const virusElement = document.querySelector('.virus');
+	const loader = document.querySelector('.spin-load-mode');
 
 	if (bugElement.style.display === 'none') {
-		bugElement.style.display = 'block';
 		virusElement.style.display = 'none';
+		loader.style.display = 'block'
 		localStorage.setItem('isParallaxMode', false)
-} else {
+		noScrollModeInit()
+		setTimeout(() => {
+			loader.style.display = 'none'
+			bugElement.style.display = 'block';
+		}, 1500);
+	} else {
 		bugElement.style.display = 'none';
-		virusElement.style.display = 'block';
+		loader.style.display = 'block'
 		localStorage.setItem('isParallaxMode', true)
+		parallaxMode()
+		setTimeout(() => {
+			loader.style.display = 'none'
+			virusElement.style.display = 'block';
+		}, 1500);
 	}
-	// console.log(isParallaxMode);
 });
 
 
-// ________[Button per-Section Handler]________
+// ________[Button per-Section Handler (No Scroll mode)]________
 const swipeTo = (selector, from, to) => {
 	const ele = document.querySelector(selector)
 
@@ -128,6 +165,7 @@ const swipeTo = (selector, from, to) => {
 		ele.style.transform = `${from}`
 		ele.style.transition = `transform 1s ease-in-out`
 		setTimeout(() => {
+			ele.style.opacity = `1`
 			ele.style.transform = `${to}`
 		}, 100);
 	}
@@ -140,12 +178,18 @@ function setActiveNavLink(event) {
 	}
 	event.currentTarget.classList.add('active');
 }
-// console.log(localStorage.getItem('isParallaxMode'));
 
-// noScrollMode()
-// document.querySelector('a[href="#about"').addEventListener('click', noScrollMode('a[href="#about"'))
-
-// console.log(document.querySelector('a[href="#about"'));
+function noScrollModeInit() {
+	document.documentElement.style.overflowY = 'hidden'
+	elementShower(`#btn1`, `translate(-200px, 0)`, `translate(0, 0)`)
+	elementShower(`#btn2`, `translate(200px, 0)`, `translate(0, 0)`)
+	elementShower(`#btn3`, `translate(0, 200px)`, `translate(0, 0)`)
+	elementShower(`.about`, `translate(0, 0)`, `translate(0, 0)`, 'flex')
+	elementHider(`#projects`)
+	elementHider(`#Internship`)
+	elementHider(`#skills`)
+	elementHider(`.footer`)
+}
 
 function noScrollMode(event) {
 	if (localStorage.getItem('isParallaxMode') == 'false') {
@@ -176,7 +220,7 @@ function noScrollMode(event) {
 			}
 		}
 
-		if (event.srcElement.id == 'btn1') {
+		if (event.srcElement.id == 'btn1' || event.srcElement.id == 'nav-projects') {
 			if (activeSec) {
 				const projectsSec = document.querySelector('#projects');
 		
@@ -198,44 +242,48 @@ function noScrollMode(event) {
 			}
 		}
 
-		if (event.srcElement.id == 'btn2') {
-			const internshipSec = document.querySelector('#Internship');
-	
-			setActiveNavLink(event)
-			swipeTo('.activeSection', `translate(0, 0)`, `translate(-1300px, -1200px)`)
-			activeSec.classList.remove('activeSection')
-			internshipSec.classList.add('activeSection')
-			setTimeout(() => {
-				let sec = secList.slice(0, 2).concat(secList.slice(3))
-				sec.forEach((selector) => {
-					const element = document.querySelector(selector);
-					if (element) {
-						element.style.display = 'none';
-					}
-				});
-				internshipSec.style.display = 'block'
-				swipeTo('#Internship', `translate(1300px, 1200px)`, `translate(0, 0)`)
-			}, 700);
+		if (event.srcElement.id == 'btn2' || event.srcElement.id == 'nav-internship') {
+			if (activeSec) {
+				const internshipSec = document.querySelector('#Internship');
+		
+				setActiveNavLink(event)
+				swipeTo('.activeSection', `translate(0, 0)`, `translate(-1300px, -1200px)`)
+				activeSec.classList.remove('activeSection')
+				internshipSec.classList.add('activeSection')
+				setTimeout(() => {
+					let sec = secList.slice(0, 2).concat(secList.slice(3))
+					sec.forEach((selector) => {
+						const element = document.querySelector(selector);
+						if (element) {
+							element.style.display = 'none';
+						}
+					});
+					internshipSec.style.display = 'block'
+					swipeTo('#Internship', `translate(1300px, 1200px)`, `translate(0, 0)`)
+				}, 700);
+			}
 		}
 
-		if (event.srcElement.id == 'btn3') {
-			const skillsSec = document.querySelector('#skills');
-	
-			setActiveNavLink(event)
-			swipeTo('.activeSection', `translate(0, 0)`, `translate(0, -1200px)`)
-			activeSec.classList.remove('activeSection')
-			skillsSec.classList.add('activeSection')
-			setTimeout(() => {
-				let sec = secList.slice(0, 3).concat(secList.slice(4))
-				sec.forEach((selector) => {
-					const element = document.querySelector(selector);
-					if (element) {
-						element.style.display = 'none';
-					}
-				});
-				skillsSec.style.display = 'block'
-				swipeTo('#skills', `translate(0, 1200px)`, `translate(0, 0)`)
-			}, 700);
+		if (event.srcElement.id == 'btn3' || event.srcElement.id == 'nav-skills') {
+			if (activeSec) {
+				const skillsSec = document.querySelector('#skills');
+		
+				setActiveNavLink(event)
+				swipeTo('.activeSection', `translate(0, 0)`, `translate(0, -1200px)`)
+				activeSec.classList.remove('activeSection')
+				skillsSec.classList.add('activeSection')
+				setTimeout(() => {
+					let sec = secList.slice(0, 3).concat(secList.slice(4))
+					sec.forEach((selector) => {
+						const element = document.querySelector(selector);
+						if (element) {
+							element.style.display = 'none';
+						}
+					});
+					skillsSec.style.display = 'block'
+					swipeTo('#skills', `translate(0, 1200px)`, `translate(0, 0)`)
+				}, 700);
+			}
 		}
 	} else {
 		msgBox('Info', `Maybe you're on Parallax mode.<br>Click on Virus icon to open No Scroll mode.`)
@@ -243,34 +291,44 @@ function noScrollMode(event) {
 }
 
 
-
 // ________[Parallax per-Section Handle]________
-// parallaxMode()
-// function parallaxMode() {
-// 	if (localStorage.getItem('isParallaxMode') == 'true') {
-// 		document.addEventListener('scroll', () => {
-// 			const scrollValue = window.scrollY;
-// 			// console.log(scrollValue);
+function parallaxMode() {
+	if (localStorage.getItem('isParallaxMode') == 'true') {
 
-// 			if (scrollValue > 0) {
-// 				const divider = scrollValue
+		// init
+		document.documentElement.style.overflowY = 'auto'
+		elementHider(`#btn1`, `translate(0, 0)`, `translate(-200px, 0)`)
+		elementHider(`#btn2`, `translate(0, 0)`, `translate(200px, 0)`)
+		elementHider(`#btn3`, `translate(0, 0)`, `translate(0, 200px)`)
+		elementShower(`.about`, `translate(0, 0)`, `translate(0, 0)`, 'flex')
+		elementShower(`#projects`)
+		elementShower(`#Internship`)
+		elementShower(`#skills`)
+		elementShower(`.footer`)
 
-// 				const aboutSec = document.querySelector('.about');
+		document.addEventListener('scroll', () => {
+			const scrollValue = window.scrollY;
+			console.log(scrollValue);
 
-// 				aboutSec.style.transition = `all .3s ease`;
-// 				if (1 - divider * 0.002 > 0) {
-// 					aboutSec.style.transform = `translate3d(-${divider * 0.9}px, ${divider * 0.5}px, 0) scale(${1 - divider * 0.002})`
-// 				}
-// 				if (divider > 900) {
-// 					aboutSec.style.opacity = '0'
-// 				} else if (divider < 900) {
-// 					aboutSec.style.opacity = '1'
-// 				}
-// 				// console.log(divider);
-// 			}
-// 		})
-// 	}
-// }
+			if (scrollValue > 0) {
+				const divider = scrollValue
+
+				const aboutSec = document.querySelector('.about');
+
+				aboutSec.style.transition = `all .3s ease`;
+				if (1 - divider * 0.002 > 0) {
+					aboutSec.style.transform = `translate3d(-${divider * 0.9}px, ${divider * 0.5}px, 0) scale(${1 - divider * 0.002})`
+				}
+				if (divider > 900) {
+					aboutSec.style.opacity = '0'
+				} else if (divider < 900) {
+					aboutSec.style.opacity = '1'
+				}
+				// console.log(divider);
+			}
+		})
+	}
+}
 
 
 // ________[Background handler]________

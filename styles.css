@@ -17,7 +17,8 @@
 
 html {
   scroll-behavior: smooth;
-  overflow: hidden;
+  overflow-x: hidden;
+  overflow-y: hidden;
 }
 
 body {
@@ -413,6 +414,7 @@ header h3 a:hover {
   flex-direction: column;
   margin-top: 3em;
   cursor: default;
+  background-color: transparent;
 }
 
 .about .hand {
@@ -854,6 +856,15 @@ svg.tea #steamR {
   }
 }
 
+@keyframes spin {
+  from {
+      transform:rotate(0deg);
+  }
+  to {
+      transform:rotate(360deg);
+  }
+}
+
 @keyframes loopPopUp {
   0% {
     transform: scale(0) translate(-250px, -250px);
@@ -1228,6 +1239,25 @@ svg.tea #steamR {
   fill: var(--clr-primary);
   transform: scale(1.2);
 }
+
+.spin-load-mode {
+  display: none;
+  position: absolute;
+  top: 6px;
+  right: 0;
+  width: 43px;
+  height: 43px;
+  background-color: transparent;
+  border: 6px solid transparent;
+  border-radius: 50%;
+  border-top: 6px solid var(--clr-primary);
+  border-bottom: 6px solid var(--clr-primary);
+  animation-name: spin;
+  animation-duration: 500ms;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+}
+
 
 /* Responsive */
 @media (max-width: 600px) {

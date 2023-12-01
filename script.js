@@ -70,9 +70,14 @@ function msgBox(title, msg) {
 			<h1>${title}</h1>
 			<p>${msg}</p>
 		</div>
+		<div class="modal-load"></div>
 	`
 	ele.innerHTML = format
 	ele.style.width = '384px'
+	document.querySelector('.modal-load').style.width = '100%'
+	setTimeout(() => {
+		document.querySelector('.modal-load').style.width = '0'
+	}, 1);
 	setTimeout(() => {
 		ele.style.opacity = '0'
 	}, 5000);
@@ -100,7 +105,7 @@ document.querySelector('.mode').addEventListener('click', () => {
 		virusElement.style.display = 'block';
 		isParallaxMode = true
 	}
-	console.log(isParallaxMode);
+	// console.log(isParallaxMode);
 });
 
 

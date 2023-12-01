@@ -57,23 +57,140 @@ function hidePreloader() {
 updateTextLoading()
 updateTextInterval = setInterval(updateTextLoading, 3000);
 window.addEventListener("load", () => {
-    setTimeout(hidePreloader, 8000);
+    setTimeout(hidePreloader, 1);
 });
 
 
-// ________[Section Handle]________
-// Projects Button
-function swipeToRight() {
-	const projectsContainer = document.querySelector('#projects');
-	projectsContainer.style.left = '0';
-}
-document.querySelector('a[href="#projects"]').addEventListener('click', () => {
-	document.querySelector('.about').style.transition = 'all 2s ease'
-	document.querySelector('.about').style.transform = 'translateX(2000px)'
+// ________[Button per-Section Handle]________
+const swipeTo = (selector, from, to) => {
+	const ele = document.querySelector(selector)
+
+	ele.style.transform = `${from}`
+	ele.style.transition = `transform 1s ease-in-out`
 	setTimeout(() => {
-		document.querySelector('#projects').style.display = 'block'
-	}, 2000);
-})
+		ele.style.transform = `${to}`
+	}, 100);
+}
+
+function setActiveNavLink(event) {
+	const activeLink = document.querySelector('.link--nav.active');
+	if (activeLink) {
+	  activeLink.classList.remove('active');
+	}
+	event.currentTarget.classList.add('active');
+}
+
+let isNoScrollMode = true
+if (isNoScrollMode) {
+	const secList = ['.about', '#projects', '#Internship', '#skills', '.footer']
+
+	document.querySelector('a[href="#about"]').addEventListener('click', (event) => {
+		const aboutSec = document.querySelector('.about');
+	
+		setActiveNavLink(event)
+		swipeTo('.activeSection', `translate(0, 0)`, `translate(0, 1200px)`)
+		document.querySelector('.activeSection').classList.remove('activeSection')
+		setTimeout(() => {
+			let sec = secList.slice(0, 0).concat(secList.slice(1))
+			sec.forEach((selector) => {
+				const element = document.querySelector(`${selector}`);
+				if (element) {
+					element.style.display = 'none';
+				}
+			});
+			aboutSec.style.display = 'flex'
+			aboutSec.classList.add('activeSection')
+			swipeTo('.about', `translate(0, -1200px)`, `translate(0, 0)`)
+		}, 700);
+	});
+	
+	document.querySelector('a[href="#projects"]').addEventListener('click', (event) => {
+		const projectsSec = document.querySelector('#projects');
+	
+		setActiveNavLink(event)
+		swipeTo('.activeSection', `translate(0, 0)`, `translate(1300px, -1200px)`)
+		document.querySelector('.activeSection').classList.remove('activeSection')
+		setTimeout(() => {
+			let sec = secList.slice(0, 1).concat(secList.slice(2))
+			sec.forEach((selector) => {
+				const element = document.querySelector(`${selector}`);
+				if (element) {
+					element.style.display = 'none';
+				}
+			});
+			projectsSec.style.display = 'block'
+			projectsSec.classList.add('activeSection')
+			swipeTo('#projects', `translate(-1300px, 1200px)`, `translate(0, 0)`)
+		}, 700);
+	});
+
+	document.querySelector('a[href="#Internship"]').addEventListener('click', (event) => {
+		const internshipSec = document.querySelector('#Internship');
+	
+		setActiveNavLink(event)
+		swipeTo('.activeSection', `translate(0, 0)`, `translate(-1300px, -1200px)`)
+		document.querySelector('.activeSection').classList.remove('activeSection')
+		setTimeout(() => {
+			let sec = secList.slice(0, 2).concat(secList.slice(3))
+			sec.forEach((selector) => {
+				const element = document.querySelector(selector);
+				if (element) {
+					element.style.display = 'none';
+				}
+			});
+			internshipSec.style.display = 'block'
+			internshipSec.classList.add('activeSection')
+			swipeTo('#Internship', `translate(1300px, 1200px)`, `translate(0, 0)`)
+		}, 700);
+	});
+
+	document.querySelector('a[href="#skills"]').addEventListener('click', (event) => {
+		const skillsSec = document.querySelector('#skills');
+	
+		setActiveNavLink(event)
+		swipeTo('.activeSection', `translate(0, 0)`, `translate(0, -1200px)`)
+		document.querySelector('.activeSection').classList.remove('activeSection')
+		setTimeout(() => {
+			let sec = secList.slice(0, 3).concat(secList.slice(4))
+			sec.forEach((selector) => {
+				const element = document.querySelector(selector);
+				if (element) {
+					element.style.display = 'none';
+				}
+			});
+			skillsSec.style.display = 'block'
+			skillsSec.classList.add('activeSection')
+			swipeTo('#skills', `translate(0, 1200px)`, `translate(0, 0)`)
+		}, 700);
+	});
+}
+
+
+// ________[Parallax per-Section Handle]________
+let isParallaxMode = false
+if (isParallaxMode) {
+	document.addEventListener('scroll', () => {
+	    const scrollValue = window.scrollY;
+	    console.log(scrollValue);
+	
+		if (scrollValue > 0) {
+	        const divider = scrollValue
+	        
+	        const aboutSec = document.querySelector('.about');
+	        
+	        aboutSec.style.transition = `all .3s ease`;
+	        if (1 - divider * 0.002 > 0) {
+				aboutSec.style.transform = `translate3d(-${divider * 0.9}px, ${divider * 0.5}px, 0) scale(${1 - divider * 0.002})`
+			}
+	        if (divider > 900) {
+	            aboutSec.style.opacity = '0'
+	        } else if (divider < 900) {
+	            aboutSec.style.opacity = '1'
+	        }
+			// console.log(divider);
+	    }
+	})
+}
 
 
 // ________[idk]________

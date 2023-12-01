@@ -38,25 +38,25 @@
         <p class="pre-text"></p>
     </div>
 
-	<a class="link link--nav" href="#projects"><ul class="nav__list" id="btn1">
-		<li class="nav__list-item">
+	<a class="link link--nav" onclick="noScrollMode(event)" href="#projects"><ul class="nav__list" id="btn1">
+		<li class="nav__list-item" id="nav-projects">
 			Projects
 		</li>
 	</ul></a>
-	<a class="link link--nav" href="#Internship"><ul class="nav__list" id="btn2">
-		<li class="nav__list-item">
+	<a class="link link--nav" onclick="noScrollMode(event)" href="#Internship"><ul class="nav__list" id="btn2">
+		<li class="nav__list-item" id="nav-internship">
 			Internship
 		</li>
 	</ul></a>
-	<a class="link link--nav" href="#skills"><ul class="nav__list" id="btn3">
-		<li class="nav__list-item">
+	<a class="link link--nav" onclick="noScrollMode(event)" href="#skills"><ul class="nav__list" id="btn3">
+		<li class="nav__list-item" id="nav-skills">
 			Skills
 		</li>
 	</ul></a>
 	
 	<header class="header center" data-aos="fade-down" data-aos-duration="800">
 		<h3 data-aos="fade-right" data-aos-delay="800" data-aos-duration="800">
-			<a href="#about" class="link">My Portfolio</a>
+			<a href="#about" class="link" id="nav-about" onclick="noScrollMode(event)">My Portfolio</a>
 		</h3>
 
 		<nav class="nav">
@@ -72,7 +72,7 @@
 				</li>
 			</ul>
 			<button type="button" aria-label="toggle theme" class="btn btn--icon" data-aos="fade-down" data-aos-delay="200" data-aos-duration="700">
-				<i aria-hidden="true" id="btn-theme" class="fas fa-moon"></i>
+				<i title="Change theme" aria-hidden="true" id="btn-theme" class="fas fa-moon"></i>
 			</button>
 
 			<button type="button" aria-label="toggle navigation" data-aos="fade-down" data-aos-delay="1200" data-aos-duration="400" class="btn btn--icon nav__hamburger">

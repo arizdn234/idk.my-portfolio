@@ -567,7 +567,6 @@ header h3 a:hover {
   transition: all .8s;
   justify-content: center;
   align-items: center;
-  border: 1px solid red;
 }
 
 .preloader .pre-title {
@@ -596,8 +595,7 @@ header h3 a:hover {
 svg.tea {
   --colorIcon: #f1f1f1;
   background-color: transparent;
-  left: 50%;
-  transform: translateX(-50%);
+  transform: scale(2);
 }
 
 svg.tea #teabag {
@@ -1338,7 +1336,8 @@ svg.tea #steamR {
   }
 
   svg.tea {
-    transform: translateY(-1rem) scale(2);
+    left: 50%;
+    transform: translate(0, 0) scale(2);
   }
 
   .mode {

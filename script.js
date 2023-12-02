@@ -57,18 +57,18 @@ function hidePreloader() {
 updateTextLoading()
 updateTextInterval = setInterval(updateTextLoading, 3000);
 window.addEventListener("load", () => {
-	setTimeout(hidePreloader, 1);
+	setTimeout(hidePreloader, 8000);
 });
 
 
 // ________[Own Builder]_______
 // Get random value
 function getRandomInt(min, max) {
-    return Math.floor(Math.random() * (max - min)) + min;
+	return Math.floor(Math.random() * (max - min)) + min;
 }
 
 // Hider element
-function elementHider(selector, from=`translate(0, 0)`, to=`translate(0, 0)`) {
+function elementHider(selector, from = `translate(0, 0)`, to = `translate(0, 0)`) {
 	const ele = document.querySelector(selector)
 	ele.style.transform = `${from} scale(1.2)`
 	ele.style.opacity = '1'
@@ -81,7 +81,7 @@ function elementHider(selector, from=`translate(0, 0)`, to=`translate(0, 0)`) {
 }
 
 // Shower element
-function elementShower(selector, from=`translate(0, 0)`, to=`translate(0, 0)`, display='block') {
+function elementShower(selector, from = `translate(0, 0)`, to = `translate(0, 0)`, display = 'block') {
 	const ele = document.querySelector(selector)
 	ele.style.transform = `${from} scale(1)`
 	ele.style.opacity = '0'
@@ -130,11 +130,38 @@ document.querySelectorAll('.no-repo').forEach(element => {
 
 
 // ________[Button mode Handler]_______
-// if (!localStorage.getItem('isParallaxMode')) {
-// 	localStorage.setItem('isParallaxMode', false) // init
-// } else if (localStorage.getItem('isParallaxMode' === true)) {
-// 	localStorage.setItem('isParallaxMode', false) // init value
-// }
+// var main = document.querySelector('body');
+// var customCursor = document.querySelector('.custom-cursor');
+
+// main.addEventListener('mouseover', (e) => {
+//     customCursor.style.transform = 'scale(1)';
+// });
+
+// document.addEventListener('mousemove', (e) => {
+//     let X = e.pageX - 30;
+//     let Y = e.pageY - 30;
+//     customCursor.style.left = X + 'px';
+//     customCursor.style.top = Y + 'px';
+// });
+
+
+document.addEventListener('DOMContentLoaded', () => {
+	// console.log(localStorage.getItem('isParallaxMode'));
+	if (localStorage.getItem('isParallaxMode') === 'true') {
+		document.querySelector('.bug').style.display = 'none'
+		document.querySelector('.spin-load-mode').style.display = 'block'
+		parallaxMode()
+		setTimeout(() => {
+			document.querySelector('.spin-load-mode').style.display = 'none'
+			document.querySelector('.virus').style.display = 'block'
+		}, 1500);
+	}
+	if (window.matchMedia("(max-width: 769px)").matches) {
+		setTimeout(() => {
+			msgBox(`Sorry`, `Change web mode is only on desktop view.`)
+		}, 10000);
+	}
+})
 
 document.querySelector('.mode').addEventListener('click', () => {
 	const bugElement = document.querySelector('.bug');
@@ -208,7 +235,7 @@ function noScrollMode(event) {
 		if (event.srcElement.id == 'nav-about') {
 			if (activeSec) {
 				const aboutSec = document.querySelector('.about');
-	
+
 				setActiveNavLink(event)
 				swipeTo('.activeSection', `translate(0, 0)`, `translate(0, 1200px)`)
 				activeSec.classList.remove('activeSection')
@@ -230,7 +257,7 @@ function noScrollMode(event) {
 		if (event.srcElement.id == 'btn1' || event.srcElement.id == 'nav-projects') {
 			if (activeSec) {
 				const projectsSec = document.querySelector('#projects');
-		
+
 				setActiveNavLink(event)
 				swipeTo('.activeSection', `translate(0, 0)`, `translate(1300px, -1200px)`)
 				activeSec.classList.remove('activeSection')
@@ -252,7 +279,7 @@ function noScrollMode(event) {
 		if (event.srcElement.id == 'btn2' || event.srcElement.id == 'nav-internship') {
 			if (activeSec) {
 				const internshipSec = document.querySelector('#Internship');
-		
+
 				setActiveNavLink(event)
 				swipeTo('.activeSection', `translate(0, 0)`, `translate(-1300px, -1200px)`)
 				activeSec.classList.remove('activeSection')
@@ -274,7 +301,7 @@ function noScrollMode(event) {
 		if (event.srcElement.id == 'btn3' || event.srcElement.id == 'nav-skills') {
 			if (activeSec) {
 				const skillsSec = document.querySelector('#skills');
-		
+
 				setActiveNavLink(event)
 				swipeTo('.activeSection', `translate(0, 0)`, `translate(0, -1200px)`)
 				activeSec.classList.remove('activeSection')
@@ -322,7 +349,7 @@ function parallaxMode() {
 		// parallax start
 		document.addEventListener('scroll', () => {
 			const scrollValue = window.scrollY;
-			console.log(scrollValue);
+			// console.log(scrollValue);
 
 			if (scrollValue > 150) {
 				document.querySelector('#backToTop').style.display = 'block'
@@ -338,11 +365,11 @@ function parallaxMode() {
 				// init element before parallax
 				aboutSec.style.transition = `all .3s ease`;
 				aboutSec.style.marginBottom = '150px'
-				
+
 				if (divider < 300) {
 					aboutSec.style.transform = `translate3d(0, ${divider * 0.5}px, 0) scale(${1 - divider * 0.002})`
 				}
-				
+
 				if (divider > 300) {
 					aboutSec.style.filter = `blur(10px)`
 					aboutSec.style.transform = `translate3d(0, ${divider * 0.9}px, 0) scale(0.3)`
@@ -365,11 +392,11 @@ function parallaxMode() {
 
 				// init element before parallax
 				projectsSec.style.transition = `all .3s ease`;
-				
+
 				if (divider < 300) {
 					projectsSec.style.transform = `translate3d(0, ${divider * 0.5}px, 0) scale(${1 - divider * 0.002})`
 				}
-				
+
 				if (divider > 300) {
 					projectsSec.style.filter = `blur(10px)`
 					projectsSec.style.transform = `translate3d(0, ${divider * 0.9}px, 0) scale(0.3)`
@@ -392,11 +419,11 @@ function parallaxMode() {
 
 				// init element before parallax
 				internshipSec.style.transition = `all .3s ease`;
-				
+
 				if (divider < 300) {
 					internshipSec.style.transform = `translate3d(0, ${divider * 0.5}px, 0) scale(${1 - divider * 0.002})`
 				}
-				
+
 				if (divider > 300) {
 					internshipSec.style.filter = `blur(10px)`
 					internshipSec.style.transform = `translate3d(0, ${divider * 0.9}px, 0) scale(0.3)`

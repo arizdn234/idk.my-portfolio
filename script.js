@@ -57,11 +57,16 @@ function hidePreloader() {
 updateTextLoading()
 updateTextInterval = setInterval(updateTextLoading, 3000);
 window.addEventListener("load", () => {
-	setTimeout(hidePreloader, 8000);
+	setTimeout(hidePreloader, 1);
 });
 
 
 // ________[Own Builder]_______
+// Get random value
+function getRandomInt(min, max) {
+    return Math.floor(Math.random() * (max - min)) + min;
+}
+
 // Hider element
 function elementHider(selector, from=`translate(0, 0)`, to=`translate(0, 0)`) {
 	const ele = document.querySelector(selector)
@@ -308,6 +313,11 @@ function parallaxMode() {
 		elementShower(`#Internship`)
 		elementShower(`#skills`)
 		elementShower(`.footer`)
+
+		if (window.matchMedia("(max-width: 769px)").matches) {
+			document.querySelector('#backToTop').style.display = 'block'
+			return
+		}
 
 		// parallax start
 		document.addEventListener('scroll', () => {

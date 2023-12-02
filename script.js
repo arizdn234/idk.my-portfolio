@@ -57,7 +57,7 @@ function hidePreloader() {
 updateTextLoading()
 updateTextInterval = setInterval(updateTextLoading, 3000);
 window.addEventListener("load", () => {
-	setTimeout(hidePreloader, 8000);
+	setTimeout(hidePreloader, 1);
 });
 
 
@@ -117,32 +117,39 @@ function msgBox(title, msg) {
 }
 
 document.querySelector('#resume').addEventListener('click', () => {
-	msgBox('Sorry', 'My Resume lost 2 week ago :(')
+	msgBox('Sorry', 'My Resume file is lost 2 week ago :(')
 })
 document.querySelector('#linked-in').addEventListener('click', () => {
 	msgBox('Sorry', 'I forgot my LinkedIn account password :(')
 })
 document.querySelectorAll('.no-repo').forEach(element => {
 	element.addEventListener('click', () => {
-		msgBox('Sorry', 'This section does not contain any repositories <br>:(')
+		msgBox('Sorry', 'This section does not contain any repositories. <br>:(')
+	})
+});
+document.querySelectorAll('.no-preview').forEach(element => {
+	element.addEventListener('click', () => {
+		msgBox('Sorry', 'This section does not contain any preview or deployment. <br>:(')
 	})
 });
 
 
 // ________[Button mode Handler]_______
-// var main = document.querySelector('body');
-// var customCursor = document.querySelector('.custom-cursor');
+const customCursor = document.querySelector('.custom-cursor');
+document.addEventListener('mousemove', (e) => {
+    let X = e.pageX - 30;
+    let Y = e.pageY - 30;
+    customCursor.style.left = X + 'px';
+    customCursor.style.top = Y + 'px';
+});
 
-// main.addEventListener('mouseover', (e) => {
-//     customCursor.style.transform = 'scale(1)';
-// });
+document.addEventListener('mouseenter', () => {
+	customCursor.style.display = 'block'
+})
 
-// document.addEventListener('mousemove', (e) => {
-//     let X = e.pageX - 30;
-//     let Y = e.pageY - 30;
-//     customCursor.style.left = X + 'px';
-//     customCursor.style.top = Y + 'px';
-// });
+document.addEventListener('mouseleave', () => {
+	customCursor.style.display = 'none'
+})
 
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -378,7 +385,7 @@ function parallaxMode() {
 				}
 
 				// default element after parallax
-				if (scrollValue > 1900) {
+				if (scrollValue > 2000) {
 					aboutSec.style.marginBottom = '0'
 				}
 				// console.log(divider);
@@ -405,7 +412,7 @@ function parallaxMode() {
 				}
 
 				// default element after parallax
-				if (scrollValue > 1900) {
+				if (scrollValue > 2000) {
 					projectsSec.style.marginBottom = '0'
 				}
 				// console.log(divider);
@@ -432,7 +439,7 @@ function parallaxMode() {
 				}
 
 				// default element after parallax
-				if (scrollValue > 1900) {
+				if (scrollValue > 2000) {
 					internshipSec.style.marginBottom = '0'
 				}
 				// console.log(divider);

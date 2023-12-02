@@ -1238,6 +1238,23 @@ svg.tea #steamR {
 }
 
 
+/* Style custom cursor */
+.custom-cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 60px;
+  height: 60px;
+  z-index: 33;
+  background-color: #fff;
+  border-radius: 50%;
+  transition: .1s;
+  pointer-events: none;
+  mix-blend-mode: difference;
+  zoom: 1;
+}
+
+
 /* Style mode */
 .mode {
   margin-right: 2rem;

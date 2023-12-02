@@ -284,6 +284,14 @@ header h3 a::after,
   color: var(--clr-primary);
 }
 
+#btn-theme {
+  border: 3px solid var(--clr-primary);
+  width: fit-content;
+  padding: .1em;
+  border-radius: 50%;
+  text-align: center;
+}
+
 /*========
   layout
 ========*/
@@ -299,6 +307,7 @@ header h3 a::after,
   width: 95%;
   margin: 0 auto;
   justify-content: space-between;
+  z-index: 18;
 }
 
 main {
@@ -317,8 +326,35 @@ main {
   text-transform: uppercase;
 }
 
+.header .nav {
+  display: flex;
+}
+
 .nav__list-sm {
   display: none;
+  padding: .4rem;
+  text-transform: uppercase;
+  border-radius: 5px;
+  font-weight: 500;
+  margin-right: 6vw;
+  background-color: transparent;
+  animation: slideDown .5s;
+}
+
+.nav__list-sm .nav__list-item {
+  border: 3px solid var(--clr-fg);
+  border-radius: 5px;
+  padding: .5em 1em;
+  margin-left: .3em;
+  background-color: transparent;
+  font-weight: 500;
+  transition: all .3s;
+  cursor: pointer;
+}
+
+.nav__list-sm .nav__list-item:hover {
+  filter: opacity(.9);
+  transform: scale(.95);
 }
 
 .nav__list {
@@ -332,8 +368,7 @@ main {
 }
 
 #btn1 {
-  top: 50%;
-  transform: translateY(-50%);
+  top: 42%;
   left: .6rem;
   writing-mode: vertical-lr;
   text-orientation: upright;
@@ -345,8 +380,7 @@ main {
 }
 
 #btn2 {
-  top: 50%;
-  transform: translateY(-50%);
+  top: 37%;
   right: .6rem;
   text-orientation: upright;
   writing-mode: vertical-lr;
@@ -357,12 +391,12 @@ main {
 }
 
 #btn3 {
-  left: 50%;
-  transform: translateX(-50%);
+  left: 47%;
   bottom: .7rem;
   padding: .6rem;
   transition: filter .3s;
   letter-spacing: 3px;
+  animation: slideUp 1s;
   z-index: 20;
   filter: invert(80%);
 }
@@ -1206,10 +1240,7 @@ svg.tea #steamR {
 
 /* Style mode */
 .mode {
-  position: absolute;
-  top: 3.8%;
-  right: 23%;
-  z-index: 0;
+  margin-right: 2rem;
 }
 
 .bug {
@@ -1242,9 +1273,6 @@ svg.tea #steamR {
 
 .spin-load-mode {
   display: none;
-  position: absolute;
-  top: 6px;
-  right: 0;
   width: 43px;
   height: 43px;
   background-color: transparent;
@@ -1323,11 +1351,12 @@ svg.tea #steamR {
 
   #btn-theme {
     font-size: 1em;
+    margin-right: 1em;
   }
 
   .nav__hamburger {
     display: flex;
-    margin-top: 0.8em;
+    margin-top: 0.25em;
   }
 
   .about {

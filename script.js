@@ -65,10 +65,10 @@ window.addEventListener("load", () => {
 // Hider element
 function elementHider(selector, from=`translate(0, 0)`, to=`translate(0, 0)`) {
 	const ele = document.querySelector(selector)
-	ele.style.transform = from
+	ele.style.transform = `${from} scale(1.2)`
 	ele.style.opacity = '1'
 	ele.style.transition = 'all .3s'
-	ele.style.transform = to
+	ele.style.transform = `${to} scale(1)`
 	setTimeout(() => {
 		ele.style.opacity = '0'
 		ele.style.display = 'none'
@@ -78,13 +78,14 @@ function elementHider(selector, from=`translate(0, 0)`, to=`translate(0, 0)`) {
 // Shower element
 function elementShower(selector, from=`translate(0, 0)`, to=`translate(0, 0)`, display='block') {
 	const ele = document.querySelector(selector)
-	ele.style.transform = from
+	ele.style.transform = `${from} scale(1)`
 	ele.style.opacity = '0'
 	ele.style.transition = 'all .3s'
-	ele.style.transform = to
+	ele.style.transform = `${to} scale(1.2)`
 	setTimeout(() => {
 		ele.style.opacity = '1'
 		ele.style.display = display
+		ele.style.transform = `scale(1)`
 	}, 1500);
 }
 
@@ -124,11 +125,11 @@ document.querySelectorAll('.no-repo').forEach(element => {
 
 
 // ________[Button mode Handler]_______
-if (!localStorage.getItem('isParallaxMode')) {
-	localStorage.setItem('isParallaxMode', false) // init
-} else if (localStorage.getItem('isParallaxMode' === true)) {
-	localStorage.setItem('isParallaxMode', false) // init value
-}
+// if (!localStorage.getItem('isParallaxMode')) {
+// 	localStorage.setItem('isParallaxMode', false) // init
+// } else if (localStorage.getItem('isParallaxMode' === true)) {
+// 	localStorage.setItem('isParallaxMode', false) // init value
+// }
 
 document.querySelector('.mode').addEventListener('click', () => {
 	const bugElement = document.querySelector('.bug');
@@ -185,7 +186,8 @@ function noScrollModeInit() {
 	elementShower(`#btn2`, `translate(200px, 0)`, `translate(0, 0)`)
 	elementShower(`#btn3`, `translate(0, 200px)`, `translate(0, 0)`)
 	elementShower(`.about`, `translate(0, 0)`, `translate(0, 0)`, 'flex')
-	elementHider(`#projects`)
+	elementHider(`.nav__list-sm`, `translate(0, 0)`, `translate(0, -200px)`)
+	elementHider(`#projects`, `translate(0, 0)`, `translate(0, 400px)`)
 	elementHider(`#Internship`)
 	elementHider(`#skills`)
 	elementHider(`.footer`)
@@ -301,28 +303,100 @@ function parallaxMode() {
 		elementHider(`#btn2`, `translate(0, 0)`, `translate(200px, 0)`)
 		elementHider(`#btn3`, `translate(0, 0)`, `translate(0, 200px)`)
 		elementShower(`.about`, `translate(0, 0)`, `translate(0, 0)`, 'flex')
+		elementShower(`.nav__list-sm`, `translate(0, -200px)`, `translate(0, 0)`, 'flex')
 		elementShower(`#projects`)
 		elementShower(`#Internship`)
 		elementShower(`#skills`)
 		elementShower(`.footer`)
 
+		// parallax start
 		document.addEventListener('scroll', () => {
 			const scrollValue = window.scrollY;
 			console.log(scrollValue);
+
+			if (scrollValue > 150) {
+				document.querySelector('#backToTop').style.display = 'block'
+			} else {
+				document.querySelector('#backToTop').style.display = 'none'
+			}
 
 			if (scrollValue > 0) {
 				const divider = scrollValue
 
 				const aboutSec = document.querySelector('.about');
 
+				// init element before parallax
 				aboutSec.style.transition = `all .3s ease`;
-				if (1 - divider * 0.002 > 0) {
-					aboutSec.style.transform = `translate3d(-${divider * 0.9}px, ${divider * 0.5}px, 0) scale(${1 - divider * 0.002})`
+				aboutSec.style.marginBottom = '150px'
+				
+				if (divider < 300) {
+					aboutSec.style.transform = `translate3d(0, ${divider * 0.5}px, 0) scale(${1 - divider * 0.002})`
 				}
-				if (divider > 900) {
-					aboutSec.style.opacity = '0'
-				} else if (divider < 900) {
-					aboutSec.style.opacity = '1'
+				
+				if (divider > 300) {
+					aboutSec.style.filter = `blur(10px)`
+					aboutSec.style.transform = `translate3d(0, ${divider * 0.9}px, 0) scale(0.3)`
+				} else if (divider < 300) {
+					aboutSec.style.filter = `blur(0)`
+				}
+
+				// default element after parallax
+				if (scrollValue > 1900) {
+					aboutSec.style.marginBottom = '0'
+				}
+				// console.log(divider);
+				document.querySelector('#projects').style.marginBottom = '220px'
+			}
+
+			if (scrollValue > 885) {
+				const divider = scrollValue - 885
+
+				const projectsSec = document.querySelector('#projects');
+
+				// init element before parallax
+				projectsSec.style.transition = `all .3s ease`;
+				
+				if (divider < 300) {
+					projectsSec.style.transform = `translate3d(0, ${divider * 0.5}px, 0) scale(${1 - divider * 0.002})`
+				}
+				
+				if (divider > 300) {
+					projectsSec.style.filter = `blur(10px)`
+					projectsSec.style.transform = `translate3d(0, ${divider * 0.9}px, 0) scale(0.3)`
+				} else if (divider < 300) {
+					projectsSec.style.filter = `blur(0)`
+				}
+
+				// default element after parallax
+				if (scrollValue > 1900) {
+					projectsSec.style.marginBottom = '0'
+				}
+				// console.log(divider);
+				document.querySelector('#Internship').style.marginBottom = '220px'
+			}
+
+			if (scrollValue > 1601) {
+				const divider = scrollValue - 1601
+
+				const internshipSec = document.querySelector('#Internship');
+
+				// init element before parallax
+				internshipSec.style.transition = `all .3s ease`;
+				
+				if (divider < 300) {
+					internshipSec.style.transform = `translate3d(0, ${divider * 0.5}px, 0) scale(${1 - divider * 0.002})`
+				}
+				
+				if (divider > 300) {
+					internshipSec.style.filter = `blur(10px)`
+					internshipSec.style.transform = `translate3d(0, ${divider * 0.9}px, 0) scale(0.3)`
+				} else if (divider < 300) {
+					internshipSec.style.filter = `blur(0)`
+				}
+
+				// default element after parallax
+				if (scrollValue > 1900) {
+					internshipSec.style.marginBottom = '0'
 				}
 				// console.log(divider);
 			}

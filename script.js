@@ -57,7 +57,7 @@ function hidePreloader() {
 updateTextLoading()
 updateTextInterval = setInterval(updateTextLoading, 3000);
 window.addEventListener("load", () => {
-	setTimeout(hidePreloader, 1);
+	setTimeout(hidePreloader, 8000);
 });
 
 
@@ -122,6 +122,9 @@ document.querySelector('#resume').addEventListener('click', () => {
 document.querySelector('#linked-in').addEventListener('click', () => {
 	msgBox('Sorry', 'I forgot my LinkedIn account password :(')
 })
+document.querySelector('#walk-codeman').addEventListener('click', () => {
+	msgBox('Info', 'For hide this animated character, click "Bugs" icon')
+})
 document.querySelectorAll('.no-repo').forEach(element => {
 	element.addEventListener('click', () => {
 		msgBox('Sorry', 'This section does not contain any repositories. <br>:(')
@@ -137,25 +140,31 @@ document.querySelectorAll('.no-preview').forEach(element => {
 // ________[Button mode Handler]_______
 const customCursor = document.querySelector('.custom-cursor');
 document.addEventListener('mousemove', (e) => {
-    let X = e.pageX - 30;
-    let Y = e.pageY - 30;
-    customCursor.style.left = X + 'px';
-    customCursor.style.top = Y + 'px';
+    if (!window.matchMedia("(max-width: 769px)").matches) {
+		let X = e.pageX - 30;
+		let Y = e.pageY - 30;
+		customCursor.style.left = X + 'px';
+		customCursor.style.top = Y + 'px';
+	}
 });
 
 document.addEventListener('mouseenter', () => {
-	customCursor.style.display = 'block'
+	if (!window.matchMedia("(max-width: 769px)").matches) {
+		customCursor.style.display = 'block'
+	}
 })
 
 document.addEventListener('mouseleave', () => {
-	customCursor.style.display = 'none'
+	if (!window.matchMedia("(max-width: 769px)").matches) {
+		customCursor.style.display = 'none'
+	}
 })
 
 
 document.addEventListener('DOMContentLoaded', () => {
 	// console.log(localStorage.getItem('isParallaxMode'));
 	if (localStorage.getItem('isParallaxMode') === 'true') {
-		document.querySelector('.bug').style.display = 'none'
+		document.querySelector('.virus-slash').style.display = 'none'
 		document.querySelector('.spin-load-mode').style.display = 'block'
 		parallaxMode()
 		setTimeout(() => {
@@ -164,14 +173,19 @@ document.addEventListener('DOMContentLoaded', () => {
 		}, 1500);
 	}
 	if (window.matchMedia("(max-width: 769px)").matches) {
+		document.querySelector('#walk-codeman').style.display = 'none'
+		document.querySelector('.custom-cursor').style.display = 'none'
 		setTimeout(() => {
 			msgBox(`Sorry`, `Change web mode is only on desktop view.`)
 		}, 10000);
 	}
+	if (localStorage.getItem('portfolio-theme') == 'light' || localStorage.getItem('isParallaxMode') == 'true') {
+		document.querySelector('#walk-codeman').style.display = 'none'
+	}
 })
 
 document.querySelector('.mode').addEventListener('click', () => {
-	const bugElement = document.querySelector('.bug');
+	const bugElement = document.querySelector('.virus-slash');
 	const virusElement = document.querySelector('.virus');
 	const loader = document.querySelector('.spin-load-mode');
 
@@ -195,6 +209,27 @@ document.querySelector('.mode').addEventListener('click', () => {
 		}, 1500);
 	}
 });
+
+document.querySelector('.bug').addEventListener('click', () => {
+	const ele = document.querySelector('#walk-codeman')
+	if (localStorage.getItem('portfolio-theme') === 'dark') {
+		if (localStorage.getItem('isParallaxMode') == 'false') {
+			ele.style.display = 'block'
+			if (ele.style.animation === '19.2s ease-in 0s infinite normal none running no') {
+				ele.style.animation = 'moveRightWalk 19.2s ease-in infinite'
+				msgBox(`Info`, `Animated char object will appears.`)
+			} else {
+				ele.style.animation = 'no 19.2s ease-in infinite'
+				msgBox(`Info`, `Animated char object was removed.<br>Click "Bugs" icon again to show it.`)
+			}
+		} else {
+			msgBox(`Info`, `Animated char object only on No Scroll mode.`)
+		}
+	} else {
+		msgBox(`Info`, `Animated char object only on dark theme.`)
+		ele.style.display = 'none'
+	}
+})
 
 
 // ________[Button per-Section Handler (No Scroll mode)]________
@@ -337,6 +372,7 @@ function parallaxMode() {
 	if (localStorage.getItem('isParallaxMode') == 'true') {
 
 		// init
+		document.querySelector('#walk-codeman').style.display = 'none'
 		document.documentElement.style.overflowY = 'auto'
 		elementHider(`#btn1`, `translate(0, 0)`, `translate(-200px, 0)`)
 		elementHider(`#btn2`, `translate(0, 0)`, `translate(200px, 0)`)
@@ -452,14 +488,6 @@ function parallaxMode() {
 // ________[Background handler]________
 // const anBG = document.querySelector('.slick-word-bg')
 // anBG.style.display = 'block'
-// setTimeout(() => {
-// 	anBG.style.transform = `translate(1400px, 900px)`
-// 	anBG.style.transition = `transform 12s ease-in-out`
-// 	setTimeout(() => {
-// 		anBG.style.transform = `translate(0, 0) scale(0)`
-// 		anBG.style.display = `none`
-// 	}, 12000);
-// }, 2000);
 
 
 // ________[idk]________
@@ -492,8 +520,13 @@ const setTheme = (bodyClass, btnClass) => {
 }
 
 const toggleTheme = () => {
-	isDark() ? setTheme('light', 'fa-moon') : setTheme('dark', 'fa-sun');
-
+	if (isDark()) {
+		setTheme('light', 'fa-moon')
+		document.querySelector('#walk-codeman').style.display = 'none'
+	} else {
+		setTheme('dark', 'fa-sun')
+		document.querySelector('#walk-codeman').style.display = 'block'
+	}
 }
 btnTheme.addEventListener('click', toggleTheme)
 

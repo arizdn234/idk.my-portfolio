@@ -181,6 +181,7 @@ header h3 a::after,
 .link {
   color: var(--clr-primary);
   position: relative;
+  z-index: 11;
 }
 
 .link:hover {
@@ -485,6 +486,7 @@ header h3 a:hover {
 .about__contact {
   animation: popUp .8s;
   cursor: pointer;
+  z-index: 3;
 }
 
 .about .mail,
@@ -1031,7 +1033,7 @@ svg.tea #steamR {
   position: absolute;
   top: 0;
   background-color: transparent;
-  transform: translate(-1200px, 500px);
+  transform: translate(-850px, 500px);
   z-index: 1;
 }
 
@@ -1106,6 +1108,30 @@ svg.tea #steamR {
     font-size: 50px;
   }
 }
+
+
+/* gif */
+#walk-codeman {
+  width: 150px;
+  position: fixed;
+  bottom: 0;
+  cursor: pointer;
+  left: -150px;
+  background-color: transparent;
+  fill: transparent;
+  z-index: 1;
+  animation: moveRightWalk 19.2s ease-in infinite;
+}
+
+@keyframes moveRightWalk {
+  0% {
+    transform: translate(0,0);
+  }
+  100% {
+    transform: translate(2200px, 0);
+  }
+}
+
 
 /* __________________________Modal Style__________________________ */
 .container-modal {
@@ -1241,8 +1267,8 @@ svg.tea #steamR {
 /* Style custom cursor */
 .custom-cursor {
   position: fixed;
-  top: 0;
-  left: 0;
+  top: -60px;
+  left: -60px;
   width: 60px;
   height: 60px;
   z-index: 33;
@@ -1251,32 +1277,32 @@ svg.tea #steamR {
   transition: .1s;
   pointer-events: none;
   mix-blend-mode: difference;
-  zoom: 1;
 }
 
 
 /* Style mode */
 .mode {
   margin-right: 2rem;
+  padding-top: 4px;
 }
 
-.bug {
+.virus-slash {
   display: block;
-  width: 2.5em;
+  width: 2.9em;
   fill: var(--clr-fg);
   transition: transform .3s;
   background-color: transparent;
   cursor: pointer;
 }
 
-.bug:hover {
+.virus-slash:hover {
   fill: var(--clr-primary);
   transform: scale(1.2);
 }
 
 .virus {
   display: none;
-  width: 2.5em;
+  width: 2.9em;
   background-color: transparent;
   fill: var(--clr-fg);
   transition: transform .3s;
@@ -1288,10 +1314,25 @@ svg.tea #steamR {
   transform: scale(1.2);
 }
 
+.bug {
+  display: block;
+  margin-right: 2em;
+  width: 2.9em;
+  background-color: transparent;
+  fill: var(--clr-fg);
+  transition: transform .3s;
+  cursor: pointer;
+}
+
+.bug:hover {
+  fill: var(--clr-primary);
+  transform: scale(1.2);
+}
+
 .spin-load-mode {
   display: none;
-  width: 43px;
-  height: 43px;
+  width: 2.9em;
+  height: 2.9em;
   background-color: transparent;
   border: 6px solid transparent;
   border-radius: 50%;
@@ -1379,6 +1420,7 @@ svg.tea #steamR {
 
   .about {
     margin-top: 2em;
+    background-color: transparent;
   }
 
   .about .raise-hand {
@@ -1418,6 +1460,10 @@ svg.tea #steamR {
   }
 
   .mode {
+    display: none;
+  }
+
+  .bug {
     display: none;
   }
 }

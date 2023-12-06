@@ -1141,6 +1141,7 @@ svg.tea #steamR {
   justify-content: center;
   color: #222;
   position: relative;
+  z-index: 32;
 }
 
 .modal {

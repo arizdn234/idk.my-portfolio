@@ -210,7 +210,7 @@ document.querySelector('.mode').addEventListener('click', () => {
 	}
 });
 
-document.querySelector('.bug').addEventListener('click', () => {
+function callCharWalk() {
 	const ele = document.querySelector('#walk-codeman')
 	if (localStorage.getItem('portfolio-theme') === 'dark') {
 		if (localStorage.getItem('isParallaxMode') == 'false') {
@@ -229,7 +229,7 @@ document.querySelector('.bug').addEventListener('click', () => {
 		msgBox(`Info`, `Animated char object only on dark theme.`)
 		ele.style.display = 'none'
 	}
-})
+}
 
 
 // ________[Button per-Section Handler (No Scroll mode)]________
@@ -522,10 +522,18 @@ const setTheme = (bodyClass, btnClass) => {
 const toggleTheme = () => {
 	if (isDark()) {
 		setTheme('light', 'fa-moon')
-		document.querySelector('#walk-codeman').style.display = 'none'
+		if (!window.matchMedia("(max-width: 768px)").matches) {
+			if (localStorage.getItem('isParallaxMode') == 'false') {
+				document.querySelector('#walk-codeman').style.display = 'none'
+			}
+		}
 	} else {
 		setTheme('dark', 'fa-sun')
-		document.querySelector('#walk-codeman').style.display = 'block'
+		if (!window.matchMedia("(max-width: 768px)").matches) {
+			if (localStorage.getItem('isParallaxMode') == 'false') {
+				document.querySelector('#walk-codeman').style.display = 'block'
+			}
+		}
 	}
 }
 btnTheme.addEventListener('click', toggleTheme)
